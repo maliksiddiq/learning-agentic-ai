@@ -179,3 +179,5 @@ The Agents SDK maps closely onto the agent design patterns Anthropic described i
 - [Anthropic — Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents)
 
 <p align="center"><strong>🐝 Swarm taught the pattern. 🚀 The Agents SDK made it production-ready.</strong></p>
+
+
