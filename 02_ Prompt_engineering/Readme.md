@@ -104,7 +104,7 @@ You almost always need **both**: the prompt guides *behavior*, the context suppl
 
 📖 **Go deeper on Context Engineering:**
 - [Context Engineering Tutorial](https://github.com/panaversity/learn-low-code-agentic-ai/blob/main/00_prompt_engineering/context_engineering_tutorial.md)
-- [`03_context_engineering` Guide](../03_context_engineering/) 
+- [`03_context_engineering` Guide](../03_context_engineering/Readme.md) 
 
 <p align="right"><a href="#-table-of-contents">⬆ Back to top</a></p>
 
