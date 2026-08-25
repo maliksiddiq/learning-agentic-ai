@@ -183,9 +183,9 @@ These four layers do **not replace each other** — they are different jobs that
 
 ### Related Learning Guides
 
-* [Learn about Prompt Engineering](../02_Prompt_engineering/README.md)
-* [Learn about Context Engineering](../03_Context_engineering/README.md)
-* [Learn about Harness Engineering](../09_Harness_engineering/README.md)
+* [Learn about Prompt Engineering](../02_Prompt_engineering/Readme.md)
+* [Learn about Context Engineering](../03_Context_engineering/Readme.md)
+* [Learn about Harness Engineering](../09_Harness_engineering/Readme.md)
 
 ---
 
