@@ -20,6 +20,7 @@
 Before anything else, here is the big picture. Every data type in Python belongs to one of these families. Keep this diagram in mind — you will keep coming back to it.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#5E81AC', 'secondaryColor': '#434C5E', 'tertiaryColor': '#3B4252', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '18px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 65, 'rankSpacing': 90, 'curve': 'basis', 'padding': 24}} }%%
 flowchart TD
     ROOT["🐍 Python Data Types"]
 
@@ -55,15 +56,15 @@ flowchart TD
 
     SPEC --> NoneType["NoneType"]
 
-    classDef root fill:#2D2E83,color:#fff,stroke:#1A1B4B,stroke-width:2px,font-weight:bold
-    classDef text fill:#E8F0FE,color:#1A3A8F,stroke:#4C6EF5,stroke-width:1.5px
-    classDef num fill:#FFF4E5,color:#8A4B00,stroke:#FF9800,stroke-width:1.5px
-    classDef booly fill:#E8F8EE,color:#1B6E3C,stroke:#34A853,stroke-width:1.5px
-    classDef seq fill:#F3E8FD,color:#5B21B6,stroke:#9C6ADE,stroke-width:1.5px
-    classDef sett fill:#FDE8F3,color:#9D174D,stroke:#EC4899,stroke-width:1.5px
-    classDef mapp fill:#E8FBFB,color:#0F5C5C,stroke:#14B8A6,stroke-width:1.5px
-    classDef bin fill:#F1F1F1,color:#333,stroke:#6B7280,stroke-width:1.5px
-    classDef spec fill:#FEECEC,color:#9A2626,stroke:#EF4444,stroke-width:1.5px
+    classDef root fill:#3B4252,color:#ECEFF4,stroke:#5E81AC,stroke-width:3px,font-weight:bold,font-size:18px
+    classDef text fill:#3A4750,color:#ECEFF4,stroke:#88C0D0,stroke-width:2px,font-weight:600
+    classDef num fill:#4A4536,color:#ECEFF4,stroke:#EBCB8B,stroke-width:2px,font-weight:600
+    classDef booly fill:#3C4638,color:#ECEFF4,stroke:#A3BE8C,stroke-width:2px,font-weight:600
+    classDef seq fill:#413B49,color:#ECEFF4,stroke:#B48EAD,stroke-width:2px,font-weight:600
+    classDef sett fill:#493C38,color:#ECEFF4,stroke:#D08770,stroke-width:2px,font-weight:600
+    classDef mapp fill:#374945,color:#ECEFF4,stroke:#8FBCBB,stroke-width:2px,font-weight:600
+    classDef bin fill:#3E4451,color:#ECEFF4,stroke:#7B88A1,stroke-width:2px,font-weight:600
+    classDef spec fill:#493536,color:#ECEFF4,stroke:#BF616A,stroke-width:2px,font-weight:600
 
     class ROOT root
     class TEXT,str text
@@ -76,7 +77,7 @@ flowchart TD
     class SPEC,NoneType spec
 ```
 
-> 💡 **How to read this diagram:** The colors are not decoration — each color is a *family*. Blue = text, orange = numbers, green = true/false, purple = ordered collections, pink = unique collections, teal = key-value pairs, gray = raw binary data, red = "nothing" values. If you forget everything else, remember the colors and the families.
+> 💡 **How to read this diagram:** The colors are not decoration — each color is a *family*. Blue = text, amber = numbers, green = true/false, purple = ordered collections, pink = unique collections, teal = key-value pairs, gray = raw binary data, red = "nothing" values. If you forget everything else, remember the colors and the families.
 
 > ⚠️ **Note on `str`:** Technically, strings behave like sequences in Python (you can index and loop over them). But for a beginner's mental model, it's clearer to think of `str` as its own **Text** category first. We'll revisit its sequence-like nature later in this guide.
 
@@ -135,10 +136,11 @@ age = 25
 In plain English, this line means: *"Create a name called `age`, and make it point to the value `25`."*
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#88C0D0', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '18px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 70, 'rankSpacing': 100, 'curve': 'basis', 'padding': 24}} }%%
 flowchart LR
     A["Variable Name<br><b>age</b>"] --> B["Reference<br>(points to)"] --> C["Object<br><b>int</b>"] --> D["Value<br><b>25</b>"]
 
-    classDef step fill:#E8F0FE,color:#1A3A8F,stroke:#4C6EF5,stroke-width:1.5px
+    classDef step fill:#3A4750,color:#ECEFF4,stroke:#88C0D0,stroke-width:2px,font-weight:600
     class A,B,C,D step
 ```
 
@@ -166,12 +168,13 @@ y = x
 Here, `y` doesn't get its own separate copy of `10`. Both `x` and `y` are names that **point to the same object** — the integer `10`.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#5E81AC', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '18px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 70, 'rankSpacing': 100, 'curve': 'basis', 'padding': 24}} }%%
 flowchart LR
     x["x"] --> obj["📦 Object: int 10"]
     y["y"] --> obj
 
-    classDef name fill:#F3E8FD,color:#5B21B6,stroke:#9C6ADE,stroke-width:1.5px
-    classDef box fill:#FFF4E5,color:#8A4B00,stroke:#FF9800,stroke-width:1.5px
+    classDef name fill:#39404E,color:#ECEFF4,stroke:#5E81AC,stroke-width:2px,font-weight:600
+    classDef box fill:#4A4536,color:#ECEFF4,stroke:#EBCB8B,stroke-width:2px,font-weight:600
     class x,y name
     class obj box
 ```
@@ -185,12 +188,13 @@ x = 20
 `x` does **not** change the object `10` into `20`. Instead, `x` is simply **pointed at a brand-new object**, `20`. The object `10` still exists, and `y` still points to it.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#5E81AC', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '18px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 70, 'rankSpacing': 100, 'curve': 'basis', 'padding': 24}} }%%
 flowchart LR
     x["x"] --> obj20["📦 Object: int 20"]
     y["y"] --> obj10["📦 Object: int 10"]
 
-    classDef name fill:#F3E8FD,color:#5B21B6,stroke:#9C6ADE,stroke-width:1.5px
-    classDef box fill:#FFF4E5,color:#8A4B00,stroke:#FF9800,stroke-width:1.5px
+    classDef name fill:#39404E,color:#ECEFF4,stroke:#5E81AC,stroke-width:2px,font-weight:600
+    classDef box fill:#4A4536,color:#ECEFF4,stroke:#EBCB8B,stroke-width:2px,font-weight:600
     class x,y name
     class obj20,obj10 box
 ```
@@ -283,6 +287,7 @@ Without data types, Python wouldn't know whether `5 + "5"` should give `10`, `"5
 Every data type was created to solve a **specific problem** that earlier tools couldn't solve well.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#D08770', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '17px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 55, 'rankSpacing': 85, 'curve': 'basis', 'padding': 24}} }%%
 flowchart TD
     P1["Need to store text"] --> S1["str"]
     P2["Need to do math"] --> S2["int / float / complex"]
@@ -296,8 +301,8 @@ flowchart TD
     P10["Need to handle raw binary data"] --> S10["bytes / bytearray / memoryview"]
     P11["Need to represent 'nothing'"] --> S11["None"]
 
-    classDef prob fill:#FEECEC,color:#9A2626,stroke:#EF4444,stroke-width:1.5px
-    classDef sol fill:#E8F8EE,color:#1B6E3C,stroke:#34A853,stroke-width:1.5px
+    classDef prob fill:#493C38,color:#ECEFF4,stroke:#D08770,stroke-width:2px,font-weight:600
+    classDef sol fill:#374945,color:#ECEFF4,stroke:#8FBCBB,stroke-width:2px,font-weight:600
     class P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11 prob
     class S1,S2,S3,S4,S5,S6,S7,S8,S9,S10,S11 sol
 ```
@@ -437,11 +442,12 @@ print(list(numbers))
 ```
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#B48EAD', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '18px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 70, 'rankSpacing': 110, 'curve': 'basis', 'padding': 24}} }%%
 flowchart LR
     L["list<br>[mutable, ordered]"] -->|"needs to stay fixed"| T["tuple<br>[immutable, ordered]"]
     T -->|"just need a number sequence"| R["range<br>[immutable, memory-efficient]"]
 
-    classDef seq fill:#F3E8FD,color:#5B21B6,stroke:#9C6ADE,stroke-width:1.5px
+    classDef seq fill:#413B49,color:#ECEFF4,stroke:#B48EAD,stroke-width:2px,font-weight:600
     class L,T,R seq
 ```
 
@@ -509,12 +515,13 @@ Karachi
 ```
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#8FBCBB', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '18px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 70, 'rankSpacing': 100, 'curve': 'basis', 'padding': 24}} }%%
 flowchart LR
     D["🗂️ Dictionary"] --> K1["'name' → 'Malik'"]
     D --> K2["'age' → 25"]
     D --> K3["'city' → 'Karachi'"]
 
-    classDef mapp fill:#E8FBFB,color:#0F5C5C,stroke:#14B8A6,stroke-width:1.5px
+    classDef mapp fill:#374945,color:#ECEFF4,stroke:#8FBCBB,stroke-width:2px,font-weight:600
     class D,K1,K2,K3 mapp
 ```
 
@@ -603,6 +610,7 @@ This is one of the most important ideas in Python.
 > **Immutable** = the object's content **cannot** be changed after creation — any "change" actually creates a brand-new object.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#81A1C1', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '17px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 60, 'rankSpacing': 90, 'curve': 'basis', 'padding': 24}} }%%
 flowchart TD
     A["Object Created"] --> B{"Can its content change?"}
     B -->|Yes| M["🟢 Mutable"]
@@ -621,8 +629,10 @@ flowchart TD
     I --> I6["bytes"]
     I --> I7["NoneType"]
 
-    classDef mut fill:#E8F8EE,color:#1B6E3C,stroke:#34A853,stroke-width:1.5px
-    classDef imm fill:#FEECEC,color:#9A2626,stroke:#EF4444,stroke-width:1.5px
+    classDef decision fill:#3B4252,color:#ECEFF4,stroke:#81A1C1,stroke-width:2px,font-weight:600
+    classDef mut fill:#3C4638,color:#ECEFF4,stroke:#A3BE8C,stroke-width:2px,font-weight:600
+    classDef imm fill:#493536,color:#ECEFF4,stroke:#BF616A,stroke-width:2px,font-weight:600
+    class A,B decision
     class M,M1,M2,M3,M4 mut
     class I,I1,I2,I3,I4,I5,I6,I7 imm
 ```
@@ -826,11 +836,12 @@ True
 ## 20. 🧭 Quick Revision
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#88C0D0', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '18px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 70, 'rankSpacing': 100, 'curve': 'basis', 'padding': 24}} }%%
 flowchart LR
     V["Variable"] --> R["Reference"] --> O["Object"] --> T["Data Type"]
     T --> Rules["Defines what operations are allowed"]
 
-    classDef step fill:#E8F0FE,color:#1A3A8F,stroke:#4C6EF5,stroke-width:1.5px
+    classDef step fill:#3A4750,color:#ECEFF4,stroke:#88C0D0,stroke-width:2px,font-weight:600
     class V,R,O,T,Rules step
 ```
 
@@ -864,5 +875,3 @@ You now understand not just the *names* of Python's data types, but **why they e
 **Next step:** open a Python file and try every example in this guide yourself. 🐍
 
 </div>
-
-
