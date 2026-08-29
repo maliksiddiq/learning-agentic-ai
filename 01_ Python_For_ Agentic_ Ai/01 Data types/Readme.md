@@ -20,41 +20,67 @@
 Before anything else, here is the big picture. Every data type in Python belongs to one of these families. Keep this diagram in mind — you will keep coming back to it.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#5E81AC', 'secondaryColor': '#434C5E', 'tertiaryColor': '#3B4252', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '18px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 65, 'rankSpacing': 90, 'curve': 'basis', 'padding': 24}} }%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#5E81AC', 'secondaryColor': '#434C5E', 'tertiaryColor': '#3B4252', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '17px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 40, 'rankSpacing': 70, 'curve': 'basis', 'padding': 24}} }%%
 flowchart TD
     ROOT["🐍 Python Data Types"]
 
-    ROOT --> TEXT["📝 Text"]
-    ROOT --> NUM["🔢 Numeric"]
-    ROOT --> BOOL["✅ Boolean"]
-    ROOT --> SEQ["📦 Sequence"]
-    ROOT --> SET["🔹 Set"]
-    ROOT --> MAP["🗂️ Mapping"]
-    ROOT --> BIN["💾 Binary"]
-    ROOT --> SPEC["🚫 Special"]
+    subgraph ROW1[ ]
+    direction LR
+        subgraph FAM_TEXT[ ]
+        direction TB
+            TEXT["📝 Text"] --> str["str"]
+        end
+        subgraph FAM_NUM[ ]
+        direction TB
+            NUM["🔢 Numeric"] --> int["int"]
+            NUM --> float["float"]
+            NUM --> complex["complex"]
+        end
+        subgraph FAM_BOOL[ ]
+        direction TB
+            BOOL["✅ Boolean"] --> bool["bool"]
+        end
+        subgraph FAM_SEQ[ ]
+        direction TB
+            SEQ["📦 Sequence"] --> list["list"]
+            SEQ --> tuple["tuple"]
+            SEQ --> range["range"]
+        end
+    end
 
-    TEXT --> str["str"]
+    subgraph ROW2[ ]
+    direction LR
+        subgraph FAM_SET[ ]
+        direction TB
+            SET["🔹 Set"] --> set1["set"]
+            SET --> frozenset["frozenset"]
+        end
+        subgraph FAM_MAP[ ]
+        direction TB
+            MAP["🗂️ Mapping"] --> dict["dict"]
+        end
+        subgraph FAM_BIN[ ]
+        direction TB
+            BIN["💾 Binary"] --> bytes["bytes"]
+            BIN --> bytearray["bytearray"]
+            BIN --> memoryview["memoryview"]
+        end
+        subgraph FAM_SPEC[ ]
+        direction TB
+            SPEC["🚫 Special"] --> NoneType["NoneType"]
+        end
+    end
 
-    NUM --> int["int"]
-    NUM --> float["float"]
-    NUM --> complex["complex"]
+    ROOT --> TEXT
+    ROOT --> NUM
+    ROOT --> BOOL
+    ROOT --> SEQ
+    ROOT --> SET
+    ROOT --> MAP
+    ROOT --> BIN
+    ROOT --> SPEC
 
-    BOOL --> bool["bool"]
-
-    SEQ --> list["list"]
-    SEQ --> tuple["tuple"]
-    SEQ --> range["range"]
-
-    SET --> set1["set"]
-    SET --> frozenset["frozenset"]
-
-    MAP --> dict["dict"]
-
-    BIN --> bytes["bytes"]
-    BIN --> bytearray["bytearray"]
-    BIN --> memoryview["memoryview"]
-
-    SPEC --> NoneType["NoneType"]
+    ROW1 ~~~ ROW2
 
     classDef root fill:#3B4252,color:#ECEFF4,stroke:#5E81AC,stroke-width:3px,font-weight:bold,font-size:18px
     classDef text fill:#3A4750,color:#ECEFF4,stroke:#88C0D0,stroke-width:2px,font-weight:600
@@ -65,6 +91,7 @@ flowchart TD
     classDef mapp fill:#374945,color:#ECEFF4,stroke:#8FBCBB,stroke-width:2px,font-weight:600
     classDef bin fill:#3E4451,color:#ECEFF4,stroke:#7B88A1,stroke-width:2px,font-weight:600
     classDef spec fill:#493536,color:#ECEFF4,stroke:#BF616A,stroke-width:2px,font-weight:600
+    classDef grp fill:transparent,stroke:#434C5E,stroke-width:1px
 
     class ROOT root
     class TEXT,str text
@@ -75,6 +102,7 @@ flowchart TD
     class MAP,dict mapp
     class BIN,bytes,bytearray,memoryview bin
     class SPEC,NoneType spec
+    class ROW1,ROW2,FAM_TEXT,FAM_NUM,FAM_BOOL,FAM_SEQ,FAM_SET,FAM_MAP,FAM_BIN,FAM_SPEC grp
 ```
 
 > 💡 **How to read this diagram:** The colors are not decoration — each color is a *family*. Blue = text, amber = numbers, green = true/false, purple = ordered collections, pink = unique collections, teal = key-value pairs, gray = raw binary data, red = "nothing" values. If you forget everything else, remember the colors and the families.
@@ -287,24 +315,56 @@ Without data types, Python wouldn't know whether `5 + "5"` should give `10`, `"5
 Every data type was created to solve a **specific problem** that earlier tools couldn't solve well.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#D08770', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '17px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 55, 'rankSpacing': 85, 'curve': 'basis', 'padding': 24}} }%%
-flowchart TD
-    P1["Need to store text"] --> S1["str"]
-    P2["Need to do math"] --> S2["int / float / complex"]
-    P3["Need true/false logic"] --> S3["bool"]
-    P4["Need to store many values in order"] --> S4["list"]
-    P5["That order shouldn't be changed"] --> S5["tuple"]
-    P6["Need to generate a number sequence efficiently"] --> S6["range"]
-    P7["Need only unique values"] --> S7["set"]
-    P8["That uniqueness shouldn't change"] --> S8["frozenset"]
-    P9["Need to link labels to values"] --> S9["dict"]
-    P10["Need to handle raw binary data"] --> S10["bytes / bytearray / memoryview"]
-    P11["Need to represent 'nothing'"] --> S11["None"]
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#D08770', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '16px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 30, 'rankSpacing': 150, 'curve': 'basis', 'padding': 24}} }%%
+flowchart LR
+    subgraph PROB["❓ The Problem"]
+    direction TB
+        P1["Need to store text"]
+        P2["Need to do math"]
+        P3["Need true/false logic"]
+        P4["Need to store many values in order"]
+        P5["That order shouldn't be changed"]
+        P6["Need to generate a number sequence efficiently"]
+        P7["Need only unique values"]
+        P8["That uniqueness shouldn't change"]
+        P9["Need to link labels to values"]
+        P10["Need to handle raw binary data"]
+        P11["Need to represent 'nothing'"]
+    end
+
+    subgraph SOL["✅ The Data Type"]
+    direction TB
+        S1["str"]
+        S2["int / float / complex"]
+        S3["bool"]
+        S4["list"]
+        S5["tuple"]
+        S6["range"]
+        S7["set"]
+        S8["frozenset"]
+        S9["dict"]
+        S10["bytes / bytearray / memoryview"]
+        S11["None"]
+    end
+
+    P1 --> S1
+    P2 --> S2
+    P3 --> S3
+    P4 --> S4
+    P5 --> S5
+    P6 --> S6
+    P7 --> S7
+    P8 --> S8
+    P9 --> S9
+    P10 --> S10
+    P11 --> S11
 
     classDef prob fill:#493C38,color:#ECEFF4,stroke:#D08770,stroke-width:2px,font-weight:600
     classDef sol fill:#374945,color:#ECEFF4,stroke:#8FBCBB,stroke-width:2px,font-weight:600
+    classDef grp fill:transparent,stroke:#434C5E,stroke-width:1px
     class P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11 prob
     class S1,S2,S3,S4,S5,S6,S7,S8,S9,S10,S11 sol
+    class PROB,SOL grp
 ```
 
 This "problem → data type" thinking is the theme of every section below — for each type, ask **"what problem does this solve?"**
@@ -442,8 +502,8 @@ print(list(numbers))
 ```
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#B48EAD', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '18px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 70, 'rankSpacing': 110, 'curve': 'basis', 'padding': 24}} }%%
-flowchart LR
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#B48EAD', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '18px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 60, 'rankSpacing': 100, 'curve': 'basis', 'padding': 24}} }%%
+flowchart TD
     L["list<br>[mutable, ordered]"] -->|"needs to stay fixed"| T["tuple<br>[immutable, ordered]"]
     T -->|"just need a number sequence"| R["range<br>[immutable, memory-efficient]"]
 
@@ -610,31 +670,42 @@ This is one of the most important ideas in Python.
 > **Immutable** = the object's content **cannot** be changed after creation — any "change" actually creates a brand-new object.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#81A1C1', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '17px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 60, 'rankSpacing': 90, 'curve': 'basis', 'padding': 24}} }%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#81A1C1', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '17px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 30, 'rankSpacing': 80, 'curve': 'basis', 'padding': 24}} }%%
 flowchart TD
     A["Object Created"] --> B{"Can its content change?"}
     B -->|Yes| M["🟢 Mutable"]
     B -->|No| I["🔴 Immutable"]
 
-    M --> M1["list"]
-    M --> M2["dict"]
-    M --> M3["set"]
-    M --> M4["bytearray"]
+    subgraph MUTG[ ]
+    direction TB
+        M1["list"]
+        M2["dict"]
+        M3["set"]
+        M4["bytearray"]
+    end
 
-    I --> I1["str"]
-    I --> I2["int / float / complex"]
-    I --> I3["bool"]
-    I --> I4["tuple"]
-    I --> I5["frozenset"]
-    I --> I6["bytes"]
-    I --> I7["NoneType"]
+    subgraph IMMG[ ]
+    direction TB
+        I1["str"]
+        I2["int / float / complex"]
+        I3["bool"]
+        I4["tuple"]
+        I5["frozenset"]
+        I6["bytes"]
+        I7["NoneType"]
+    end
+
+    M --> MUTG
+    I --> IMMG
 
     classDef decision fill:#3B4252,color:#ECEFF4,stroke:#81A1C1,stroke-width:2px,font-weight:600
     classDef mut fill:#3C4638,color:#ECEFF4,stroke:#A3BE8C,stroke-width:2px,font-weight:600
     classDef imm fill:#493536,color:#ECEFF4,stroke:#BF616A,stroke-width:2px,font-weight:600
+    classDef grp fill:transparent,stroke:#434C5E,stroke-width:1px
     class A,B decision
     class M,M1,M2,M3,M4 mut
     class I,I1,I2,I3,I4,I5,I6,I7 imm
+    class MUTG,IMMG grp
 ```
 
 ```python
