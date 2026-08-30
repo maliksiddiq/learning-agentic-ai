@@ -17,55 +17,102 @@
 
 ## 🗺️ The Python Data Types Map
 
-Here is the big picture first. Every data type in Python belongs to one of these groups. Look at this map before you read anything else — you will come back to it many times.
+Here is the big picture first. Every data type in Python belongs to one of these groups. Read this map **one row at a time**: inside a row, go left to right; when a row is full, move down to the next row.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background': '#F2F2F2', 'primaryColor': '#C8E6C9', 'primaryTextColor': '#1B1B1B', 'primaryBorderColor': '#A5D6A7', 'lineColor': '#333333', 'fontSize': '30px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 110, 'rankSpacing': 180, 'curve': 'basis', 'padding': 40} } }%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#F7F7F7', 'primaryColor': '#C8E6C9', 'primaryTextColor': '#1B1B1B', 'primaryBorderColor': '#A5D6A7', 'lineColor': '#5B5B5B', 'fontSize': '38px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'wrappingWidth': 600, 'nodeSpacing': 60, 'rankSpacing': 120, 'curve': 'basis', 'padding': 46} } }%%
 flowchart TB
     ROOT{{"🐍 Python Data Types"}}
 
-    ROOT --> TEXT(["📝 Text"])
-    ROOT --> NUM(["🔢 Numeric"])
-    ROOT --> BOOL(["✅ Boolean"])
-    ROOT --> SEQ(["📦 Sequence"])
-    ROOT --> SET(["🔹 Set"])
-    ROOT --> MAP(["🗂️ Dictionary"])
-    ROOT --> BIN(["💾 Binary"])
-    ROOT --> SPEC(["🚫 Special"])
+    subgraph ROW1[ ]
+    direction LR
+        subgraph G_NUM[ ]
+        direction TB
+            NUM(["🔢 Numeric"])
+            NUM --> int["Integer"]
+            NUM --> flt["Float"]
+            NUM --> cplx["Complex"]
+        end
+        subgraph G_BOOL[ ]
+        direction TB
+            BOOL(["✅ Boolean"])
+            BOOL --> btrue["True"]
+            BOOL --> bfalse["False"]
+        end
+    end
 
-    TEXT --> str["String"]
+    subgraph ROW2[ ]
+    direction LR
+        subgraph G_SEQ[ ]
+        direction TB
+            SEQ(["📦 Sequence Type"])
+            SEQ --> lst["List"]
+            SEQ --> tpl["Tuple"]
+            SEQ --> rng["Range"]
+        end
+        subgraph G_SPEC[ ]
+        direction TB
+            SPEC(["🚫 Special Type"])
+            SPEC --> non["None"]
+        end
+    end
 
-    NUM --> int["Integer"]
-    NUM --> float["Float"]
-    NUM --> complexn["Complex Number"]
+    subgraph ROW3[ ]
+    direction LR
+        subgraph G_TEXT[ ]
+        direction TB
+            TEXT(["📝 Text"])
+            TEXT --> str["String"]
+        end
+        subgraph G_SET[ ]
+        direction TB
+            SET(["🔹 Set"])
+            SET --> st1["Set"]
+            SET --> fzs["Frozenset"]
+        end
+    end
 
-    BOOL --> booln["True / False"]
+    subgraph ROW4[ ]
+    direction LR
+        subgraph G_MAP[ ]
+        direction TB
+            MAP(["🗂️ Dictionary"])
+            MAP --> dct["Dict"]
+        end
+        subgraph G_BIN[ ]
+        direction TB
+            BIN(["💾 Binary"])
+            BIN --> byt["Bytes"]
+            BIN --> bya["Bytearray"]
+            BIN --> mvw["Memoryview"]
+        end
+    end
 
-    SEQ --> list["List"]
-    SEQ --> tuple["Tuple"]
-    SEQ --> range["Range"]
+    ROOT --> NUM
+    ROOT --> BOOL
+    ROOT --> SEQ
+    ROOT --> SPEC
+    ROOT --> TEXT
+    ROOT --> SET
+    ROOT --> MAP
+    ROOT --> BIN
 
-    SET --> set1["Set"]
-    SET --> frozenset["Frozenset"]
+    ROW1 ~~~ ROW2 ~~~ ROW3 ~~~ ROW4
 
-    MAP --> dict["Dict"]
-
-    BIN --> bytes["Bytes"]
-    BIN --> bytearray["Bytearray"]
-    BIN --> memoryview["Memoryview"]
-
-    SPEC --> none["None"]
-
-    classDef root fill:#2E7D32,color:#FFFFFF,stroke:#1B5E20,stroke-width:4px,font-weight:bold,font-size:38px
-    classDef category fill:#66BB6A,color:#FFFFFF,stroke:#1B5E20,stroke-width:3px,font-weight:bold,font-size:30px
-    classDef leaf fill:#C8E6C9,color:#1B1B1B,stroke:#A5D6A7,stroke-width:2px,font-weight:bold,font-size:26px
+    classDef root fill:#2E7D32,color:#FFFFFF,stroke:#1B5E20,stroke-width:5px,font-weight:bold,font-size:45px
+    classDef category fill:#66BB6A,color:#FFFFFF,stroke:#1B5E20,stroke-width:3.5px,font-weight:bold,font-size:38px
+    classDef leaf fill:#C8E6C9,color:#1B1B1B,stroke:#A5D6A7,stroke-width:2.5px,font-weight:bold,font-size:33px
+    classDef grp fill:transparent,stroke:transparent
 
     class ROOT root
-    class TEXT,NUM,BOOL,SEQ,SET,MAP,BIN,SPEC category
-    class str,int,float,complexn,booln,list,tuple,range,set1,frozenset,dict,bytes,bytearray,memoryview,none leaf
+    class NUM,BOOL,SEQ,SPEC,TEXT,SET,MAP,BIN category
+    class int,flt,cplx,btrue,bfalse,lst,tpl,rng,non,str,st1,fzs,dct,byt,bya,mvw leaf
+    class ROW1,ROW2,ROW3,ROW4,G_NUM,G_BOOL,G_SEQ,G_SPEC,G_TEXT,G_SET,G_MAP,G_BIN grp
+
+    linkStyle default stroke:#5B5B5B,stroke-width:2.5px
 ```
 
-> 💡 **How to read this map:** The dark green box at the top is the main idea. The medium green boxes are the 8 groups (families) of data types. The light green boxes are the actual data types you will use in your code.
+> 💡 **How to read this map:** The dark green box at the top is the main idea. Below it, each row holds **two groups side by side** — for example, **Numeric** and **Boolean** share the first row. Directly under each group, its own data types are connected with a thin arrow. Once a row is full, the next two groups start on the row below.
 
 > ⚠️ **Note on `str`:** A string acts a bit like a list (you can loop over it and pick letters from it). But for now, it's easier to just think of `str` as **Text**. We explain this more later in the guide.
 
@@ -629,43 +676,49 @@ This is one of the most important ideas in Python.
 > **Mutable** = you **can** change the content after it's created.
 > **Immutable** = you **cannot** change the content after it's created — any "change" actually makes a brand-new object.
 
+This diagram follows the same idea: the decision sits on top, and then **Mutable** and **Immutable** sit side by side (left to right), each with its own types listed underneath in a thin column.
+
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#81A1C1', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '28px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 70, 'rankSpacing': 150, 'curve': 'basis', 'padding': 36}} }%%
-flowchart TD
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#81A1C1', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '23px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'wrappingWidth': 500, 'nodeSpacing': 34, 'rankSpacing': 68, 'curve': 'basis', 'padding': 24}} }%%
+flowchart TB
     A["Object Created"] --> B{"Can its content change?"}
-    B -->|Yes| M["🟢 Mutable"]
-    B -->|No| I["🔴 Immutable"]
 
-    subgraph MUTG[ ]
-    direction TB
-        M1["list"]
-        M2["dict"]
-        M3["set"]
-        M4["bytearray"]
+    subgraph ROWMI[ ]
+    direction LR
+        subgraph G_MUT[ ]
+        direction TB
+            M["🟢 Mutable"]
+            M --> M1["list"]
+            M --> M2["dict"]
+            M --> M3["set"]
+            M --> M4["bytearray"]
+        end
+        subgraph G_IMM[ ]
+        direction TB
+            I["🔴 Immutable"]
+            I --> I1["str"]
+            I --> I2["int / float / complex"]
+            I --> I3["bool"]
+            I --> I4["tuple"]
+            I --> I5["frozenset"]
+            I --> I6["bytes"]
+            I --> I7["NoneType"]
+        end
     end
 
-    subgraph IMMG[ ]
-    direction TB
-        I1["str"]
-        I2["int / float / complex"]
-        I3["bool"]
-        I4["tuple"]
-        I5["frozenset"]
-        I6["bytes"]
-        I7["NoneType"]
-    end
+    B -->|"Yes"| M
+    B -->|"No"| I
 
-    M --> MUTG
-    I --> IMMG
-
-    classDef decision fill:#3B4252,color:#ECEFF4,stroke:#81A1C1,stroke-width:3px,font-weight:bold,font-size:30px
-    classDef mut fill:#3C4638,color:#ECEFF4,stroke:#A3BE8C,stroke-width:3px,font-weight:bold,font-size:26px
-    classDef imm fill:#493536,color:#ECEFF4,stroke:#BF616A,stroke-width:3px,font-weight:bold,font-size:26px
-    classDef grp fill:transparent,stroke:#434C5E,stroke-width:1px
+    classDef decision fill:#3B4252,color:#ECEFF4,stroke:#81A1C1,stroke-width:2px,font-weight:bold,font-size:24px
+    classDef mut fill:#3C4638,color:#ECEFF4,stroke:#A3BE8C,stroke-width:2px,font-weight:bold,font-size:21px
+    classDef imm fill:#493536,color:#ECEFF4,stroke:#BF616A,stroke-width:2px,font-weight:bold,font-size:21px
+    classDef grp fill:transparent,stroke:transparent
     class A,B decision
     class M,M1,M2,M3,M4 mut
     class I,I1,I2,I3,I4,I5,I6,I7 imm
-    class MUTG,IMMG grp
+    class ROWMI,G_MUT,G_IMM grp
+
+    linkStyle default stroke:#81A1C1,stroke-width:1.5px
 ```
 
 ```python
