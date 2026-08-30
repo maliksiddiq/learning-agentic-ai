@@ -20,7 +20,7 @@
 Here is the big picture first. Every data type in Python belongs to one of these groups. Look at this map before you read anything else — you will come back to it many times.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background': '#F2F2F2', 'primaryColor': '#C8E6C9', 'primaryTextColor': '#1B1B1B', 'primaryBorderColor': '#A5D6A7', 'lineColor': '#333333', 'fontSize': '22px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 60, 'rankSpacing': 110, 'curve': 'basis', 'padding': 24} } }%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#F2F2F2', 'primaryColor': '#C8E6C9', 'primaryTextColor': '#1B1B1B', 'primaryBorderColor': '#A5D6A7', 'lineColor': '#333333', 'fontSize': '30px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 110, 'rankSpacing': 180, 'curve': 'basis', 'padding': 40} } }%%
 flowchart TB
     ROOT{{"🐍 Python Data Types"}}
 
@@ -56,9 +56,9 @@ flowchart TB
 
     SPEC --> none["None"]
 
-    classDef root fill:#2E7D32,color:#FFFFFF,stroke:#1B5E20,stroke-width:3px,font-weight:bold,font-size:26px
-    classDef category fill:#66BB6A,color:#FFFFFF,stroke:#1B5E20,stroke-width:2px,font-weight:bold,font-size:22px
-    classDef leaf fill:#C8E6C9,color:#1B1B1B,stroke:#A5D6A7,stroke-width:2px,font-weight:bold,font-size:20px
+    classDef root fill:#2E7D32,color:#FFFFFF,stroke:#1B5E20,stroke-width:4px,font-weight:bold,font-size:38px
+    classDef category fill:#66BB6A,color:#FFFFFF,stroke:#1B5E20,stroke-width:3px,font-weight:bold,font-size:30px
+    classDef leaf fill:#C8E6C9,color:#1B1B1B,stroke:#A5D6A7,stroke-width:2px,font-weight:bold,font-size:26px
 
     class ROOT root
     class TEXT,NUM,BOOL,SEQ,SET,MAP,BIN,SPEC category
@@ -630,7 +630,7 @@ This is one of the most important ideas in Python.
 > **Immutable** = you **cannot** change the content after it's created — any "change" actually makes a brand-new object.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#81A1C1', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '17px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': true, 'htmlLabels': true, 'nodeSpacing': 30, 'rankSpacing': 80, 'curve': 'basis', 'padding': 24}} }%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#2E3440', 'primaryColor': '#3B4252', 'primaryTextColor': '#ECEFF4', 'primaryBorderColor': '#81A1C1', 'lineColor': '#81A1C1', 'edgeLabelBackground': '#3B4252', 'fontSize': '28px', 'fontFamily': 'Segoe UI, Arial, sans-serif'}, 'flowchart': {'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 70, 'rankSpacing': 150, 'curve': 'basis', 'padding': 36}} }%%
 flowchart TD
     A["Object Created"] --> B{"Can its content change?"}
     B -->|Yes| M["🟢 Mutable"]
@@ -658,9 +658,9 @@ flowchart TD
     M --> MUTG
     I --> IMMG
 
-    classDef decision fill:#3B4252,color:#ECEFF4,stroke:#81A1C1,stroke-width:2px,font-weight:600
-    classDef mut fill:#3C4638,color:#ECEFF4,stroke:#A3BE8C,stroke-width:2px,font-weight:600
-    classDef imm fill:#493536,color:#ECEFF4,stroke:#BF616A,stroke-width:2px,font-weight:600
+    classDef decision fill:#3B4252,color:#ECEFF4,stroke:#81A1C1,stroke-width:3px,font-weight:bold,font-size:30px
+    classDef mut fill:#3C4638,color:#ECEFF4,stroke:#A3BE8C,stroke-width:3px,font-weight:bold,font-size:26px
+    classDef imm fill:#493536,color:#ECEFF4,stroke:#BF616A,stroke-width:3px,font-weight:bold,font-size:26px
     classDef grp fill:transparent,stroke:#434C5E,stroke-width:1px
     class A,B decision
     class M,M1,M2,M3,M4 mut
